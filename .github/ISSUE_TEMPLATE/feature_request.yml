@@ -1,0 +1,14 @@
+name: Feature request
+description: Suggest an improvement to the pixel refinement workflow
+body:
+  - type: textarea
+    id: use_case
+    attributes:
+      label: What are you trying to achieve?
+      description: Explain the workflow and why the current controls are insufficient.
+    validations:
+      required: true
+  - type: textarea
+    id: solution
+    attributes:
+      label: Suggested behavior
