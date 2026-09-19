@@ -8,16 +8,17 @@ export function parsePalette(text: string): RGB[] {
   const colors: RGB[] = [];
   for (const raw of lines.slice(gpl ? 1 : 0)) {
     const line = raw.trim();
-    if (!line || (gpl && /^(#|Name:|Columns:)/.test(line)) || (!gpl && line.startsWith('//'))) continue;
+    if (!line || (gpl && /^(#|Name:|Columns:)/.test(line)) || (!gpl && line.startsWith('//')))
+      continue;
     if (gpl) {
       const match = line.match(/^(\d+)\s+(\d+)\s+(\d+)(?:\s.*)?$/);
       if (!match) throw new Error('palette');
       const color = match.slice(1, 4).map(Number) as RGB;
-      if (color.some(v => v > 255)) throw new Error('palette');
+      if (color.some((v) => v > 255)) throw new Error('palette');
       colors.push(color);
     } else colors.push(fromHex(line));
   }
-  const unique = [...new Map(colors.map(c => [hex(c), c])).values()];
+  const unique = [...new Map(colors.map((c) => [hex(c), c])).values()];
   if (!unique.length || unique.length > 255) throw new Error('palette');
   return unique;
 }
